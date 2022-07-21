@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand">Navbar</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <ul class="list-group"> <!--  클래스 탈부착식으로 개발하면 애니메이션 추가와 재사용 편리 -->
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form action="success.html">
+          <div class="my-3">
+            <input type="text" class="form-control" id="email">
+           </div>
+           <div class="my-3">
+             <input type="password" class="form-control">
+           </div>
+           <button type="submit" class="btn btn-primary" id="send">전송</button>
+           <button type="button" class="btn btn-danger" id="close">닫기</button>
+        </form> 
+      </div>
+    </div>
+
+    <div class="main-bg">
+      <h4>Shirts on Sale</h4>
+      <button class="btn btn-primary" id="login">로그인</button>
+    </div> 
+    
+    <script>
+      // 전송버튼 누르면
+      // input에 입력한 값이 공백이면 알림창 띄워주세요
+
+			/* 내가 만든 답 */
+      var str = document.getElementsByClassName('my-3')
+      $('#send').on('click', function(){
+          if(str.value == null ){
+          alert('내용을 입력해주세요')
+        }
+      });
+
+      // 선생님 답 (위와 동일한 결과)
+      $('form').on('submit', function(){
+          if(document.getElementById('email').value == '' ){
+          alert('이메일을 입력해주세요')
+        }
+			});
+        
+      // 선생님 답 2
+      $('form').on('submit', function(e){
+          if(document.getElementById('email').value == '' ){
+          alert('이메일을 입력해주세요')
+          e.preventDefault(); // 폼전송도 막을 수 있다
+        }
+			});
+
+      $('#login').on('click', function(){
+       $('.black-bg').addClass('show-modal');
+      });
+      
+      $('#close').on('click', function(){
+        $('.black-bg').removeClass('show-modal');
+      });
+      </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
