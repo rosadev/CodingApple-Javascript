@@ -8,10 +8,11 @@
     <link href="main.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   </head>
-  <body>
+  <body class="dark"> <!-- dark 클래스를 탈부착하는 방식으로 다크모드를 만든다 -->
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
+        <span class="badge bg-dark">Dark</span>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -112,8 +113,89 @@
       // || or  둘 중 하나가 참이면 전체가 참
       if( (1 == 1 && 2 == 2) && 3 == 3  ) {      
         console.log('안녕')
+      } 
+
+      // 369게임 (3의 배수 박수)
+      function game(x) {
+          if (x % 3 == 0) {
+            console.log('박수');
+          } else {
+            console.log('통과');
+          }
       }
-      
+      game(15);
+
+      // 369게임 업그레이드 (9의 배수는 박수 두번)
+      function gameUpgrade(x) {
+          if (x % 9 == 0) {
+            console.log('박수x2');
+          } else if (x % 3 == 0) {
+            console.log('박수');
+          } else {
+            console.log('통과');
+          }
+      }
+      gameUpgrade(18);
+
+      // 공인중개사 시험점수 입력하면 합격인지 알려주는 함수
+      // 두과목 합산 120이상 합격, 한과목이 40점 미만이면 과락
+      function passExam(x, y){
+        if (x+y >= 120 && (x < 40 || y < 40)){
+          console.log('과락');
+        } else if (x+y >= 120) {
+          console.log('합격');
+        } else {
+          console.log('불합격');
+        }
+      }
+      passExam(60, 60);
+      passExam(39, 81);
+      passExam(40, 50);
+
+      //답은 맞는데 나 왜케 어렵게 짰냐. 간단하게 짠 답안
+      function passExamSimple(a, b){
+        if ( a < 40 || b < 40 ) {
+          console.log('불합격')
+        } else if (a + b >= 120) {
+          console.log('합격')
+        } else {
+          console.log('불합격')
+        }
+      }
+      passExamSimple(60, 60); 
+      passExamSimple(39, 80);
+      passExamSimple(40, 50);
+
+      //badge 클릭횟수가 홀수번 클릭시 버튼 내부 글자를 Light로 변경, 짝수면 Dark로 변경
+      var clickCnt = 0;
+
+      $('.badge').on('click', function(){
+        if (clickCnt % 2 == 1) {
+          $('.badge').html('Light');
+        } else {
+          $('.badge').html('Dark');
+        } 
+        clickCnt++;
+        console.log(clickCnt);
+      })
+
+      //변수의 선언, 할당, 범위
+      var 이름; // 선언   
+      이름 = 'kim'; // 할당
+      이름 = 'park'; // 재할당
+
+      // 범위 : 함수 안에서 변수를 만들면 지역변수. 함수 안에서만 사용가능. 바깥에서 만들어도 함수 내 사용 가능 
+      function 함수() {
+        var 이름 = 'kim';
+        console.log(이름);
+      }
+
+      // var let const 차이
+      let name = 'kim'; // 재선언 x, 재할당 o
+      // let name = 'park'; // 요거 안됨. 실수를 방지
+      const name2 = 'kim'; // 재선언x, 재할당 x
+      // name2 = 'park'; // 변하면 안되는 상수를 보관하기 좋음
+
       </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
