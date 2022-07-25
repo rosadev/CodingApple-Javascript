@@ -40,13 +40,70 @@
         </form> 
       </div>
     </div>
-
     <div class="main-bg">
       <h4>Shirts on Sale</h4>
       <button class="btn btn-primary" id="login">로그인</button>
     </div> 
     
+    <p>태조 이성계가 태어난 년도는?</p>
+    <input type="text" id="answer">
+    <button id="send-answer">제출</button>
+
+    <div class="alert alert-danger">
+      <span id="num">5</span>초 이내 구매시 사은품 증정!
+    </div>
+
     <script>
+      // 과제 : 5, 4, 3, 2, 1초로 내려가는 카운팅
+      var cnt = 5;
+      setInterval(function(){
+        cnt -= 1;
+        if(cnt >= 0) {
+          document.querySelector('#num').innerHTML = cnt;
+        } 
+      }, 1000);
+
+      // 5초 이후에는 증정박스 안보이게 하기
+      setTimeout(function(){
+        if (cnt == 0) {
+          $('.alert').hide();
+        }
+      }, 5000);
+
+
+      // 5초 후에 사은품 증정 박스 안보이게 하기
+      // setTimeout(function(){
+      //   $('.alert').hide();
+      // }, 5000);
+
+      // x초 마다 코드를 실행하려면
+      // setInterval(function(){
+      //   console.log('안녕');
+      // }, 1000);
+
+      
+      // 함수를 만들어서 심는 방법으로 깔끔하게
+      setTimeout(메롱함수, 1000)
+      
+      function 메롱함수(){
+        console.log('메롱')
+      }
+
+      // 이성계 퀴즈
+      var count = 0;
+      document.querySelector('#send-answer').addEventListener('click', function(){
+        count += 1;
+        var userAnswer = document.querySelector('#answer').value;
+        if (userAnswer == '1335') {
+          alert('성공')
+        } else if (count >= 3 && userAnswer != '1335'){
+          alert('멍청아')
+        } else {
+          alert('실패')
+        }
+      });
+
+
       // 전송버튼 누르면
       // input에 입력한 값이 공백이면 알림창 띄워주세요
 
@@ -195,6 +252,37 @@
       // let name = 'park'; // 요거 안됨. 실수를 방지
       const name2 = 'kim'; // 재선언x, 재할당 x
       // name2 = 'park'; // 변하면 안되는 상수를 보관하기 좋음
+
+      // 과제: 2년 후 예금액 구하기
+      // 5만원미만 불입시 연이율 15%, 5만원이상 불입시 연이율 20%
+      var mn = 60000;  // 불입액
+      var fuMn = 0;     // 미래예금액
+
+      function intCalc(mn) {
+        if(mn < 50000) {
+           fuMn = (mn * 1.15 * 1.15);
+        } else if (mn >= 50000) {
+          fuMn = (mn * 1.2 * 1.2);
+        }
+      }
+
+      intCalc(mn);
+      console.log(fuMn);
+
+      //과제 : 2/3씩 커피 리필해주기
+      
+      var first = 360;
+      var total = 0;
+
+      function refill(first) {
+        total = first + (first*2/3)*2/3;  
+      }
+
+      refill(first);
+      console.log(total);
+
+  
+    
 
       </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
