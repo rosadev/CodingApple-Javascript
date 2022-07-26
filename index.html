@@ -52,8 +52,34 @@
     <div class="alert alert-danger">
       <span id="num">5</span>초 이내 구매시 사은품 증정!
     </div>
+    
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="img/car1.png">
+        </div>
+        <div class="slide-box">
+          <img src="img/car2.png">
+        </div>
+        <div class="slide-box">
+          <img src="img/car3.png">
+        </div>
+      </div>
+   </div> 
+
+   <button class="slide-1">1</button>
+   <button class="slide-2">2</button>
+   <button class="slide-3">3</button>
+   <button class="next">다음</button>
 
     <script>
+      // carousel 만들기
+      $('.slide-2').on('click', function(){
+        $('.slide-container').css('transform', 'translateX(-100vw)'); /* margin-left보다 부드러움 */
+      })
+
+
+
       // 과제 : 5, 4, 3, 2, 1초로 내려가는 카운팅
       var cnt = 5;
       setInterval(function(){
@@ -72,9 +98,9 @@
 
 
       // 5초 후에 사은품 증정 박스 안보이게 하기
-      // setTimeout(function(){
-      //   $('.alert').hide();
-      // }, 5000);
+      setTimeout(function(){
+        $('.alert').hide();
+      }, 5000);
 
       // x초 마다 코드를 실행하려면
       // setInterval(function(){
