@@ -60,3 +60,14 @@
 .slide-box img {
   width: 100%;
 } 
+
+.navbar {
+  position: fixed; /* 상단고정 */
+  width: 100%;
+  z-index: 5; /* 앞으로 뒤로 보내기 기능 */
+}
+
+.navbar-brand {
+  font-size: 30px;
+  transition: all 1s;
+}

@@ -71,13 +71,85 @@
    <button class="slide-2">2</button>
    <button class="slide-3">3</button>
    <button class="next">다음</button>
+   <button class="before">이전</button>
+
+   <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll;">
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae ex quam illo ea ut deleniti, cupiditate nostrum, numquam, atque voluptatem voluptate praesentium doloribus eum dolor est similique distinctio expedita dicta!
+   </div>
+
+   <div style="height: 1000px"></div>
 
     <script>
+      // 스크롤 내린 높이 측정
+      window.addEventListener('scroll', function(){
+        var windowScroll = window.scrollY;
+        if (windowScroll >= 100) {
+          $('.navbar-brand').css('font-size', '20px');
+        } if (windowScroll < 100) {
+          $('.navbar-brand').css('font-size', '30px');
+        }
+      });
+
+      // 스크롤 다 내렸을때 alert 설정
+      $('.lorem').on('scroll', function(){
+        var 스크롤양 = document.querySelector('.lorem').scrollTop;
+        var 실제높이 = document.querySelector('.lorem').scrollHeight;
+        var 높이 = document.querySelector('.lorem').clientHeight;
+        console.log(스크롤양, 실제높이);
+        if (스크롤양 + 높이 >= 실제높이) {
+          window.alert('약관이 끝났습니다');
+        }
+      });
+
       // carousel 만들기
+      $('.slide-1').on('click', function(){
+        $('.slide-container').css('transform', 'translateX(0vw)'); 
+      });
+
       $('.slide-2').on('click', function(){
         $('.slide-container').css('transform', 'translateX(-100vw)'); /* margin-left보다 부드러움 */
-      })
+      });
+      // 자바스크립트 구현시 -> document.querySelector('.slide-container').style.transform = 'translateX(-100vw)'
 
+      $('.slide-3').on('click', function(){
+        $('.slide-container').css('transform', 'translateX(-200vw)'); 
+      });
+
+      // 다음버튼
+      var nowView = 1;
+      $('.next').on('click', function(){
+        if (nowView == 1) {
+         $('.slide-container').css('transform', 'translateX(-100vw)');
+         nowView += 1;
+        } else if (nowView == 2) {
+          $('.slide-container').css('transform', 'translateX(-200vw)');
+          nowView += 1;
+        } else if (nowView == 3) {
+          $('.slide-container').css('transform', 'translateX(-0vw)');
+          nowView = 1;
+        }
+      });
+
+      // 이전버튼
+      $('.before').on('click', function(){
+        if (nowView == 1) {
+         $('.slide-container').css('transform', 'translateX(-200vw)');
+         nowView = 3;
+        } else if (nowView == 2) {
+          $('.slide-container').css('transform', 'translateX(0vw)');
+          nowView -= 1;
+        } else if (nowView == 3) {
+          $('.slide-container').css('transform', 'translateX(-100vw)');
+          nowView -= 1;
+        }
+      });
+
+      // 다음버튼 확장성 업그레이드
+      // var nowView2 = 1;
+      // $('.next').on('click', function(){ 
+      //    $('.slide-container').css('transform', 'translateX(-' + nowView2 + '00vw)');
+      //    nowView2 += 1;
+      // });
 
 
       // 과제 : 5, 4, 3, 2, 1초로 내려가는 카운팅
@@ -188,7 +260,7 @@
       // 엄격한 비교는 === , 느슨한 비교는 ==
       // 아래의 경우 == 일때는 true, === 일때는 false 나온다
       if( 1 == '1' ) {      
-        console.log('안녕')
+        console.log('안녕') 
       }
 
       // 조건 2개 이상을 동시에 비교하고 싶다면 
@@ -306,6 +378,15 @@
 
       refill(first);
       console.log(total);
+
+      // 부가세 계산기 만들기
+
+      console.log(vat(6000));
+
+      function vat(a){
+        var num = (a * 1.1).toFixed(2);  // 소숫점을 반올림 toFixed(소수점 몇자리)
+        return parseFloat(num)
+      }
 
   
     
