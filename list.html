@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="card-group container">
+      <div class="card">
+        <!-- <img src="https://via.placeholder.com/600"> -->
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p>가격 : <span class="card-price">70000</span></p>
+          <button class="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+      <div class="card">
+        <!-- <img src="https://via.placeholder.com/600"> -->
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p>가격 : <span class="card-price">70000</span></p>
+          <button class="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+      <div class="card">
+        <!-- <img src="https://via.placeholder.com/600"> -->
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p>가격 : <span class="card-price">70000</span></p>
+          <button class="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+    </div>
+    <script>
+        
+      var products = [
+        { id : 0, price : 70000, title : 'Blossom Dress' },
+        { id : 1, price : 50000, title : 'Springfield Shirt' },
+        { id : 2, price : 60000, title : 'Black Monastery' }
+      ];
+
+
+      for(let i=0; i<products.length; i++){
+      document.querySelectorAll('.card-title')[i].innerHTML = products[i].title;
+      document.querySelectorAll('.card-price')[i].innerHTML = products[i].price;
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

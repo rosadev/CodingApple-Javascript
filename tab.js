@@ -15,7 +15,6 @@ for (let i = 0; i < 3; i++) {
   });  
 }
 
-
 // button.eq(1).on('click', function(){
 //   button.removeClass("orange");
 //   button.eq(1).addClass("orange");
@@ -29,3 +28,9 @@ for (let i = 0; i < 3; i++) {
 //   content.removeClass("show");
 //   content.eq(2).addClass("show");
 // });
+
+var car = ['소나타', 50000, 'white']; // array형
+var car2 = {name : '소나타', price : [50000, 3000, 4000]}  // object형
+document.querySelector('.car-title').innerHTML = car2.name;
+document.querySelector('.car-price').innerHTML = car2.price[0];
+
