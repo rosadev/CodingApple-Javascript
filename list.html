@@ -9,32 +9,31 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="card-group container">
-      <div class="card">
-        <!-- <img src="https://via.placeholder.com/600"> -->
-        <div class="card-body">
-          <h5>Card title</h5>
-          <p>가격 : 70000</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
+
+    <div class="container">
+      <div class="row">
+    
+          <!-- <div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>Card title</h5>
+            <p>가격 : 70000</p>
+          </div> -->
+    
       </div>
-      <div class="card">
-        <!-- <img src="https://via.placeholder.com/600"> -->
-        <div class="card-body">
-          <h5>Card title</h5>
-          <p>가격 : 70000</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
+      <div class="container my-3">
+        <button class="btn btn-danger" id="more">더보기</button>
       </div>
-      <div class="card">
-        <!-- <img src="https://via.placeholder.com/600"> -->
-        <div class="card-body">
-          <h5>Card title</h5>
-          <p>가격 : 70000</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
+      <div class="container my-3">
+        <button class="btn btn-danger" id="price">가격순정렬</button>
       </div>
-    </div>
+      <div class="container my-3">
+        <button class="btn btn-danger" id="sortC">다나가순정렬</button>
+      </div>
+      <div class="container my-3">
+        <button class="btn btn-danger" id="filter">6만원이하</button>
+      </div>
+    </div> 
+  
     <script>
         
       var products = [
@@ -42,33 +41,154 @@
         { id : 1, price : 50000, title : 'Springfield Shirt' },
         { id : 2, price : 60000, title : 'Black Monastery' }
       ];
-
-
-      for(let i=0; i<products.length; i++){
-        document.querySelectorAll('.card-body h5')[i].innerHTML= products[i].title;
-        document.querySelectorAll('.card-body p')[i].innerHTML= '가격은' + products[i].price;
-      }
-
-      // get 요청하는 법 (성공, 실패)
-      $.get('https://codingapple1.github.io/hello.txt')
-      .done(function(data){
-        console.log(data)
-      })
-        .fail(function(error){
-        console.log('실패함')
-      });
-
-      //post 요청하는법 (서버없어서 형식만)
-      // $.post('https://codingapple1.github.io/hello.txt', {name : 'kim'}).done(function(data){
-      //   console.log(data)
-      // });
-
-      $.get('https://codingapple1.github.io/price.json')
-      .done(function(data){
-        console.log(data);
-        console.log(data.price);
-      });
+      
+      // 카드 템플릿 3개 만들기
+      products.forEach((a, i)=> {
+      var card_template =  
+      `<div class="col-sm-4">
+              <img src="https://via.placeholder.com/600" class="w-100">
+              <h5>${products[i].title}</h5>   
+              <p>가격 : ${products[i].price}</p>  
+              <button class="buy">구매</button>
+            </div> `;
+      $('.row').append(card_template);
+    });
     
+    // 더보기 버튼 누르면 카드 템플릿 3개 추가
+    $('#more').click(function(){
+      $.get('https://codingapple1.github.io/js/more1.json')
+      .done((data)=>{
+        console.log(data);
+
+        data.forEach((a, i)=> {
+          var card_template2 =  
+          `<div class="col-sm-4">
+                  <img src="https://via.placeholder.com/600" class="w-100">
+                  <h5>${a.title}</h5>   
+                  <p>가격 : ${a.price}</p>  
+                  <button class="buy">구매</button>
+                </div> `;
+          $('.row').append(card_template2);
+        });  
+      });
+    });
+
+      // 가격순정렬 누르면 가격순 정렬하기
+      $('#price').click(function(){
+        products.sort(function(a, b){
+          return a.price - b.price
+        });
+        $('.row').html('');
+        products.forEach((a, i)=> {
+          var card_template =  
+          `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${products[i].title}</h5>   
+            <p>가격 : ${products[i].price}</p>  
+            <button class="buy">구매</button>
+            </div> `;
+            $('.row').append(card_template);
+          });
+      });
+      
+      
+
+
+    var arrays = [7,3,5,2,40];
+    var arrays2 = ['a','c','m','b']
+    // 문자정렬
+    arrays2.sort();
+
+    // 문자역순정렬
+    arrays.sort(function(a , b){
+      if (a < b) {
+        return 1
+      } else {
+        return -1
+      }
+    })  
+    console.log(arrays2);
+
+    //숫자정렬
+    arrays.sort(function(a,b){
+      return a - b
+    });
+    console.log(arrays);
+
+    // 필터
+    var arraysNew = arrays.filter(function(a){
+      return a < 4
+    });
+    console.log(arraysNew);
+
+    // sort()는 원본변형 O
+    // filter()는 원본변형 X (새 변수에 담아줘야함)
+
+    // map (환율변경할때 유용)
+    var arraysNew2 = arrays.map(function(a){
+      return a * 4
+    });
+    console.log(arraysNew2);
+
+    // 다나가순 정렬
+    $('#sortC').click(function(){
+        products.sort(function(a, b){
+          if (a.title < b.title) {
+            return 1
+          } else {
+            return -1
+          }
+        });
+        $('.row').html('');
+        products.forEach((a, i)=> {
+          var card_template =  
+          `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${products[i].title}</h5>   
+            <p>가격 : ${products[i].price}</p>  
+            <button class="buy">구매</button>
+            </div> `;
+            $('.row').append(card_template);
+          });
+      });
+
+      // 6만원 이하상품 필터
+      $('#filter').click(function(){
+        var newProducts = products.filter(function(a){
+          return a.price <= 60000
+        });
+        $('.row').html('');
+        newProducts.forEach((a, i)=> {
+          var card_template =  
+          `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${a.title}</h5>   
+            <p>가격 : ${a.price}</p>  
+            <button class="buy">구매</button>
+            </div> `;
+            $('.row').append(card_template);
+          });
+      });
+
+      // 데이터 반영구적 저장 : 브라우저 안 저장공간 이용
+      // => f12 > Application > Local Storage 
+
+      // 로컬스토리지에 데이터 저장
+      localStorage.setItem('이름', 'kim');
+
+      // 로컬스토리지 데이터 꺼내쓰기
+      localStorage.getItem('이름');
+
+      // 로컬스토리지에 데이터 삭제
+      localStorage.removeItem('이름');
+
+      // 로컬스토리지에 array, object 저장하려면
+      var arr = [1,2,3];
+      var newArr = JSON.stringify(arr); // json으로 바꾸기
+      localStorage.setItem('num', newArr);
+      var output = localStorage.getItem('num');
+      console.log(JSON.parse(output)[0]);
+
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
