@@ -48,6 +48,28 @@
         document.querySelectorAll('.card-body h5')[i].innerHTML= products[i].title;
         document.querySelectorAll('.card-body p')[i].innerHTML= '가격은' + products[i].price;
       }
+
+      // get 요청하는 법 (성공, 실패)
+      $.get('https://codingapple1.github.io/hello.txt')
+      .done(function(data){
+        console.log(data)
+      })
+        .fail(function(error){
+        console.log('실패함')
+      });
+
+      //post 요청하는법 (서버없어서 형식만)
+      // $.post('https://codingapple1.github.io/hello.txt', {name : 'kim'}).done(function(data){
+      //   console.log(data)
+      // });
+
+      $.get('https://codingapple1.github.io/price.json')
+      .done(function(data){
+        console.log(data);
+        console.log(data.price);
+      });
+    
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
