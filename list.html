@@ -187,8 +187,38 @@
       var newArr = JSON.stringify(arr); // json으로 바꾸기
       localStorage.setItem('num', newArr);
       var output = localStorage.getItem('num');
-      console.log(JSON.parse(output)[0]);
+      console.log(JSON.parse(output)[0]); 
 
+      //세션 스토리지 사용할때도 똑같다.
+
+    // 과제 : 구매버튼 누르면 누른 상품명 localStorage 저장하기
+
+    $('.buy').click(function(e){
+      var title = $(e.target).siblings('h5').text();
+      // e.target.previousElementSibling.previousElementSibling //쌩자바스크립트로 찾을 경우
+      // 카트 항목이 null이 아닌 경우 수정해주세요 
+      // 1. 꺼내서 2. 자료추가하고 3. 다시 넣기
+      if (localStorage.getItem('cart') != null ){
+        var outputCart = JSON.parse(localStorage.cart);
+        outputCart.push(title);
+        localStorage.setItem('cart', JSON.stringify(outputCart));
+      } else {
+        localStorage.setItem('cart', JSON.stringify([title])); // array를 바로 넣으면 깨지므로 JSON화 시켜준다
+      }
+    });
+
+    // 과정 외워서치기 연습
+    // $('.buy').click(function(e){
+    //   var title = $(e.target).siblings('h5').text();
+    //   if (localStorage.getItem('cart') != null) {
+    //     var outputCart = JSON.parse(localStorage.cart);
+    //     outputCart.push(title);
+    //     localStorage.setItem('cart', JSON.stringify(outputCart));
+    //   }
+    //   else {
+    //     localStorage.setItem('cart', JSON.stringify([title]));
+    //   }
+    // });
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
